@@ -6,8 +6,9 @@ public class Receiver {
 
 	private CountDownLatch latch = new CountDownLatch(1);
 
-	public void receiveMessage(String message) {
-		System.out.println("Received <" + message + ">");
+	public void receiveMessage(String message) throws InterruptedException {
+		System.out.println("Receiver 0 received :: <" + message + ">");
+		Thread.sleep(1000);
 		latch.countDown();
 	}
 

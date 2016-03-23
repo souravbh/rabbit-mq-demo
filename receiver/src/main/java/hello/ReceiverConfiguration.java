@@ -1,8 +1,6 @@
 package hello;
 
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,13 +51,6 @@ public class ReceiverConfiguration {
         return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 
-    @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(new String[]{queueName1});
-        container.setMessageListener(listenerAdapter);
-        return container;
-    }
+
 
 }

@@ -32,7 +32,9 @@ public class SenderApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Sending message...");
 
-        rabbitTemplate.convertAndSend("spring-boot-1", "Hello from RabbitMQ - 0 !");
+        String jsonMessage = "{\"message\":\"hello\", \"email\":\"a@a.com\"}";
+
+        rabbitTemplate.convertAndSend("spring-boot-1", jsonMessage);
 
         rabbitTemplate.setReceiveTimeout(3000);
         String response = (String) rabbitTemplate.convertSendAndReceive(exchange.getName(), "demo.rpc", "hello madhan ");
